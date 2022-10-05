@@ -4,7 +4,7 @@
 #### 🌱 Sou formada em Engenharia da Computação - UP e faço MBA em Engenharia de Softwre na UTFPR
 #### ⚡  Linguagens de programação: 
 #### Front-end: Java Script, React, HTML5, CSS3
-#### Back-end: C, C++, C#, Java e Python, Node JS
+#### Back-end: C, C++, C#, Node JS
 #### Mobile: Flutter e React Native 
 
 <div>
