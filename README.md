@@ -2,10 +2,10 @@
 ### Olá Pessoal 👋
 #### 🔭 Atualmente trabalho como desenvolvedora Full Stack
 #### 🌱 Sou formada em Engenharia da Computação - UP e faço MBA em Engenharia de Softwre na UTFPR
-⚡  Linguagens de programação: 
-Front-end: Java Script, React, HTML5, CSS3
-Back-end: C, C++, C#, Java e Python, Node JS
-Mobile: Flutter e React Native 
+####⚡  Linguagens de programação: 
+####Front-end: Java Script, React, HTML5, CSS3
+####Back-end: C, C++, C#, Java e Python, Node JS
+####Mobile: Flutter e React Native 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
