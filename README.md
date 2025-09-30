@@ -1,7 +1,7 @@
 
 ### Olá Pessoal 👋
 #### 🔭 Atualmente trabalho como desenvolvedora Full Stack Pleno
-#### 🌱 Sou formada em Engenharia da Computação - UP e faço MBA em Engenharia de Softwre na UTFPR
+#### 🌱 Sou formada em Engenharia da Computação - UP e MBA em Engenharia de Softwre na UTFPR
 #### ⚡  Linguagens de programação: 
 #### Front-end: Java Script, React, HTML5, CSS3
 #### Back-end: C, C++, C#, Node JS
