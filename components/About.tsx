@@ -6,13 +6,15 @@ export function About() {
   return (
     <section id="sobre" className="scroll-mt-20 bg-paper pb-20 text-ink sm:pb-28">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-2 lg:gap-16">
-        <div className="relative aspect-[4/5] overflow-hidden bg-ink sm:aspect-[5/4] lg:aspect-[4/5]">
+        {/* A placa e a entrada da oficina ficam à esquerda da foto; um recorte
+            centralizado deixaria só a árvore em quadro. */}
+        <div className="relative aspect-[4/3] overflow-hidden bg-ink sm:aspect-[16/9] lg:aspect-[4/3]">
           <Image
             src={shopImage.src}
             alt={shopImage.alt}
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover"
+            className="object-cover object-[30%_45%]"
           />
         </div>
         <div>

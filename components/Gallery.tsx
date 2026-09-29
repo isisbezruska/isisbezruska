@@ -3,13 +3,13 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { workPhotos, type WorkPhoto } from "@/lib/content";
+import { galleryPhotos, type Photo } from "@/lib/content";
 
 export function Gallery() {
   const [active, setActive] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
-  const photo: WorkPhoto | null = active === null ? null : workPhotos[active];
+  const photo: Photo | null = active === null ? null : galleryPhotos[active];
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -24,32 +24,30 @@ export function Gallery() {
   function showPrevious() {
     setActive((current) => {
       if (current === null) return current;
-      return (current - 1 + workPhotos.length) % workPhotos.length;
+      return (current - 1 + galleryPhotos.length) % galleryPhotos.length;
     });
   }
 
   function showNext() {
     setActive((current) => {
       if (current === null) return current;
-      return (current + 1) % workPhotos.length;
+      return (current + 1) % galleryPhotos.length;
     });
   }
 
   return (
-    <section id="trabalhos" className="scroll-mt-20 bg-ink py-20 text-paper sm:py-28">
+    <section id="galeria" className="scroll-mt-20 bg-ink pb-20 text-paper sm:pb-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <p className="text-xs font-medium tracking-[0.18em] text-gold uppercase">
-          Antes e depois
-        </p>
-        <h2 className="mt-3 max-w-xl font-display text-4xl leading-tight font-medium text-balance sm:text-5xl">
-          Trabalhos realizados
+        <h2 className="max-w-xl font-display text-3xl leading-tight font-medium text-balance sm:text-4xl">
+          Outros trabalhos realizados
         </h2>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-paper/70 sm:text-base">
-          Registros reais da oficina: funilaria, pintura e restauração.
+          Carros prontos para a entrega e trabalhos de funilaria, pintura, polimento
+          e restauração, fotografados na própria oficina.
         </p>
 
         <ul className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3">
-          {workPhotos.map((item, index) => (
+          {galleryPhotos.map((item, index) => (
             <li key={item.src} className="mb-4 break-inside-avoid">
               <button
                 type="button"

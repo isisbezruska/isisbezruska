@@ -1,23 +1,43 @@
-export type WorkPhoto = {
+/**
+ * Catálogo das fotos e dos textos da página.
+ *
+ * Origem das imagens:
+ * - `entrega-*.webp` — publicações do Instagram @recar_reparacao_automotiva,
+ *   baixadas e convertidas para WebP. São 640px no lado maior, o máximo que o
+ *   Instagram entrega publicamente; use-as só em grade/lightbox, nunca em hero.
+ * - as demais — site antigo (https://oficinarecar.wixsite.com/recar), sobretudo
+ *   a página /antesedepois.
+ *
+ * Cada alt descreve o que a foto realmente mostra — confira a imagem antes de
+ * editar qualquer descrição aqui.
+ */
+
+export type Photo = {
   src: string;
   alt: string;
   width: number;
   height: number;
 };
 
-export const heroImage = {
-  src: "/images/funilaria-hero.webp",
-  alt: "Carro branco na oficina da RECAR, com a porta dianteira danificada, durante um reparo de funilaria",
+/**
+ * Enquadramento fechado na lataria: mostra o acabamento da pintura sem depender
+ * de um modelo de carro específico e não quebra em nenhuma proporção de tela.
+ * A 960x720 cobre o painel do hero sem precisar de ampliação.
+ */
+export const heroImage: Photo = {
+  src: "/images/pintura-preta-polida.webp",
+  alt: "Lateral de um carro preto com a pintura polida refletindo o entorno, ao lado da roda esportiva",
+  width: 960,
+  height: 720,
+};
+
+/** Fachada da oficina na R. José Rubens de Lima, 400, com a placa da RECAR. */
+export const shopImage: Photo = {
+  src: "/images/recar-fachada-sao-braz.webp",
+  alt: "Fachada da RECAR no bairro São Braz, em Curitiba, com a placa da oficina e um Fusca preto estacionado na frente",
   width: 1920,
   height: 961,
-} as const;
-
-export const shopImage = {
-  src: "/images/recar-oficina.webp",
-  alt: "Carro vermelho no elevador da oficina RECAR, em Curitiba",
-  width: 1600,
-  height: 1200,
-} as const;
+};
 
 export const trustItems = [
   "+30 anos de experiência",
@@ -33,10 +53,10 @@ export const services = [
       "Batidas, portas, capô, pinos e soldas, com avaliação técnica para um reparo cuidadoso.",
     featured: true,
     image: {
-      src: "/images/funilaria-02.webp",
-      alt: "Porta desmontada de um carro branco ao lado da carroceria, em reparo de lataria",
-      width: 1600,
-      height: 1025,
+      src: "/images/fusca-preto-restaurado.webp",
+      alt: "Fusca preto com a lataria e a pintura refeitas, fotografado ao lado de outros Fuscas",
+      width: 1280,
+      height: 1122,
     },
   },
   {
@@ -45,10 +65,10 @@ export const services = [
       "Repintura e acerto de cor, em pinturas comuns e especiais. Parceria com a Tropical Tintas há mais de vinte anos.",
     featured: true,
     image: {
-      src: "/images/pintura-automotiva-02.webp",
-      alt: "Carro prata com áreas mascaradas, preparado para pintura na oficina",
+      src: "/images/classico-azul-paralama.webp",
+      alt: "Paralama dianteiro de um carro clássico com a pintura azul refeita e o friso lateral cromado",
       width: 960,
-      height: 720,
+      height: 717,
     },
   },
   {
@@ -76,88 +96,150 @@ export const services = [
   },
 ] as const;
 
-export const workPhotos: WorkPhoto[] = [
+/**
+ * As duas únicas imagens do site antigo em que o antes e o depois aparecem juntos,
+ * montados pela própria oficina. Não monte pares novos a partir de fotos soltas —
+ * não há como saber se são do mesmo veículo.
+ */
+export const beforeAfter: Array<Photo & { caption: string }> = [
   {
-    src: "/images/funilaria-01.webp",
-    alt: "Kombi branca e amarela com dano na lateral, em reparo de funilaria na RECAR",
+    src: "/images/antes-depois-kombi-amarela.webp",
+    alt: "Quatro etapas da restauração de uma Kombi: a lataria bege original, a carroceria lixada, o primer cinza e a pintura final em amarelo e branco",
     width: 1600,
     height: 1600,
+    caption:
+      "Kombi refeita da lataria à pintura: chapa recuperada, primer e o acabamento final em amarelo e branco.",
   },
   {
-    src: "/images/pintura-automotiva-02.webp",
-    alt: "Carro prata com papel de proteção nas áreas que não serão pintadas",
-    width: 960,
-    height: 720,
-  },
-  {
-    src: "/images/funilaria-02.webp",
-    alt: "Carro branco com a porta removida, expondo a estrutura para funilaria",
-    width: 1600,
-    height: 1025,
-  },
-  {
-    src: "/images/restauracao-01.webp",
-    alt: "Porta de Fusca azul com ferrugem, durante restauração na oficina",
+    src: "/images/antes-depois-kombi-bege.webp",
+    alt: "Comparação de uma Kombi antes e depois: embaixo, a pintura bege desgastada; em cima, a Kombi pronta em amarelo e branco",
     width: 900,
     height: 900,
+    caption: "A mesma Kombi antes do reparo e depois de pronta.",
+  },
+];
+
+/**
+ * Carros prontos, fotografados no mesmo ponto da oficina (o painel amarelo com a
+ * marca da RECAR) antes de voltarem para o cliente. É o conjunto mais recente e o
+ * que melhor mostra o carro do dia a dia, então abre a galeria.
+ */
+export const deliveredPhotos: Photo[] = [
+  {
+    src: "/images/entrega-toyota-corolla-branco.webp",
+    alt: "Toyota Corolla branco pronto para a entrega, em frente ao painel amarelo com a marca da RECAR",
+    width: 640,
+    height: 640,
   },
   {
-    src: "/images/funilaria-03.webp",
-    alt: "Traseira de hatch branco com a tampa aberta, em serviço de funilaria",
-    width: 1280,
-    height: 1122,
+    src: "/images/entrega-renault-captur.webp",
+    alt: "Renault Captur marrom com a pintura refeita, pronto para a entrega na oficina",
+    width: 624,
+    height: 640,
   },
   {
-    src: "/images/pintura-automotiva-03.webp",
-    alt: "Carro preto com a lateral protegida por papel para pintura da lataria",
-    width: 960,
-    height: 720,
+    src: "/images/entrega-ford-fiesta-vermelho.webp",
+    alt: "Ford Fiesta vermelho com a pintura polida, pronto para a entrega na oficina",
+    width: 640,
+    height: 640,
   },
   {
-    src: "/images/funilaria-06.webp",
-    alt: "Lateral traseira de carro branco com a porta removida para reparo",
+    src: "/images/entrega-renault-fluence-branco.webp",
+    alt: "Renault Fluence branco pronto para a entrega, em frente ao painel amarelo da RECAR",
+    width: 640,
+    height: 640,
+  },
+  {
+    src: "/images/entrega-mitsubishi-lancer-branco.webp",
+    alt: "Mitsubishi Lancer branco pronto após o serviço, em frente ao painel amarelo da RECAR",
+    width: 613,
+    height: 640,
+  },
+  {
+    src: "/images/entrega-bmw-preto.webp",
+    alt: "BMW preto com a pintura espelhada, pronto para a entrega em frente ao painel amarelo da RECAR",
+    width: 640,
+    height: 640,
+  },
+  {
+    src: "/images/entrega-hatch-prata.webp",
+    alt: "Hatch prata com a frente recuperada e a pintura polida, pronto para a entrega",
+    width: 512,
+    height: 640,
+  },
+  {
+    src: "/images/entrega-cupe-vermelho.webp",
+    alt: "Cupê esportivo vermelho com a pintura refeita, parado em frente ao painel amarelo da RECAR",
+    width: 640,
+    height: 640,
+  },
+  {
+    src: "/images/entrega-fusca-azul.webp",
+    alt: "Fusca azul restaurado, com para-choques cromados e faróis auxiliares, pronto na oficina",
+    width: 640,
+    height: 640,
+  },
+  {
+    src: "/images/entrega-perua-preta.webp",
+    alt: "Perua preta com rack de teto, pronta para a entrega em frente ao painel amarelo da RECAR",
+    width: 640,
+    height: 640,
+  },
+  {
+    src: "/images/entrega-sedan-fiat-preto.webp",
+    alt: "Sedã Fiat preto com a pintura espelhada e rodas de liga, pronto para a entrega",
+    width: 640,
+    height: 640,
+  },
+];
+
+/** Demais trabalhos da oficina, sem pares de antes e depois identificáveis. */
+export const workPhotos: Photo[] = [
+  {
+    src: "/images/kombi-amarela-restaurada.webp",
+    alt: "Kombi amarela e branca restaurada, estacionada ao lado de uma perua vermelha",
     width: 1280,
     height: 853,
   },
   {
-    src: "/images/restauracao-02.webp",
-    alt: "Interior de Fusca com a porta aberta, em processo de restauração",
-    width: 800,
-    height: 600,
-  },
-  {
-    src: "/images/funilaria-04.webp",
-    alt: "Porta de carro branco com amassado, vista de perto na oficina",
-    width: 750,
-    height: 1000,
-  },
-  {
-    src: "/images/pintura-automotiva-01.webp",
-    alt: "Carro vermelho sobre o elevador da oficina, em serviço de pintura e funilaria",
+    src: "/images/pintura-preta-reflexo-placa.webp",
+    alt: "Placa da RECAR refletida na pintura preta espelhada de um carro recém-polido",
     width: 960,
-    height: 717,
+    height: 720,
   },
   {
-    src: "/images/funilaria-07.webp",
-    alt: "Frente de carro branco com o para-choque removido, em reparo de lataria",
-    width: 800,
-    height: 600,
-  },
-  {
-    src: "/images/restauracao-03.webp",
-    alt: "Fusca azul visto de lado, em trabalho de restauração",
+    src: "/images/ford-f100-lateral.webp",
+    alt: "Lateral de uma picape Ford F-100 azul restaurada, com o emblema do modelo no paralama",
     width: 750,
     height: 1000,
   },
   {
-    src: "/images/funilaria-05.webp",
-    alt: "Porta de carro branco com dano na lataria, fotografada de perto",
+    src: "/images/mustang-verde-restaurado.webp",
+    alt: "Frente de um Ford Mustang verde escuro restaurado, com os faróis e a grade recuperados",
+    width: 800,
+    height: 600,
+  },
+  {
+    src: "/images/chevrolet-vermelho-restaurado.webp",
+    alt: "Chevrolet vermelho restaurado estacionado ao lado de um Mustang preto, em frente a uma parede laranja",
+    width: 800,
+    height: 600,
+  },
+  {
+    src: "/images/ford-f100-frente.webp",
+    alt: "Frente de uma picape Ford F-100 azul e branca restaurada, com o para-choque e a grade cromados",
+    width: 750,
+    height: 1000,
+  },
+  {
+    src: "/images/fusca-bege-traseira.webp",
+    alt: "Traseira de um Fusca bege rebaixado, com a pintura polida e roda esportiva",
     width: 720,
     height: 1280,
   },
   {
-    src: "/images/funilaria-08.webp",
-    alt: "Lateral traseira de carro azul com a porta desmontada para funilaria",
+    src: "/images/moto-tanque-polido.webp",
+    alt: "Tanque de uma moto preta com a pintura espelhada, refletindo o céu e as nuvens",
     width: 704,
     height: 960,
   },
@@ -178,8 +260,12 @@ export const steps = [
   },
 ] as const;
 
+/** Tudo o que entra na galeria, dos carros mais recentes aos restaurados. */
+export const galleryPhotos: Photo[] = [...deliveredPhotos, ...workPhotos];
+
+/** Amostra da seção de Instagram — precisa vir do próprio perfil. */
 export const socialPhotos = [
-  workPhotos[3],
-  workPhotos[5],
-  workPhotos[0],
+  deliveredPhotos[0],
+  deliveredPhotos[2],
+  deliveredPhotos[8],
 ] as const;

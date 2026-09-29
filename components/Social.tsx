@@ -3,14 +3,13 @@ import { socialPhotos } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export function Social() {
-  const primary = site.facebook[0];
-  const secondary = site.facebook[1];
+  const { instagram } = site;
 
   return (
     <section aria-labelledby="social-titulo" className="bg-ink py-20 text-paper sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <p className="text-xs font-medium tracking-[0.18em] text-gold uppercase">
-          Facebook
+          Instagram
         </p>
         <h2
           id="social-titulo"
@@ -19,22 +18,23 @@ export function Social() {
           Acompanhe nossos trabalhos
         </h2>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-paper/70 sm:text-base">
-          As fotos abaixo são da oficina. Para ver as publicações, abra o Facebook da
-          RECAR.
+          Publicamos os carros prontos no Instagram da RECAR. Siga{" "}
+          {instagram.handle} para ver os trabalhos mais recentes.
         </p>
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-3">
           {socialPhotos.map((photo) => (
             <li key={photo.src}>
               <a
-                href={primary.href}
+                href={instagram.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Abrir o Instagram da RECAR — foto: ${photo.alt}`}
                 className="group block overflow-hidden bg-panel"
               >
                 <Image
                   src={photo.src}
-                  alt={photo.alt}
+                  alt=""
                   width={photo.width}
                   height={photo.height}
                   sizes="(min-width: 640px) 33vw, 100vw"
@@ -45,24 +45,15 @@ export function Social() {
           ))}
         </ul>
 
-        <div className="mt-8 flex flex-col gap-3 text-sm sm:flex-row sm:gap-8">
-          <a
-            href={primary.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-gold decoration-2 underline-offset-4"
-          >
-            {primary.name}
-          </a>
-          <a
-            href={secondary.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-gold decoration-2 underline-offset-4"
-          >
-            {secondary.name}
-          </a>
-        </div>
+        <a
+          href={instagram.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm underline decoration-gold decoration-2 underline-offset-4"
+        >
+          Ver o perfil no Instagram
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
   );

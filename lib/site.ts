@@ -34,26 +34,26 @@ export const site = {
     latitude: -25.415102,
     longitude: -49.3583808,
   },
-  facebook: [
-    {
-      name: "RECAR Reparação Automotiva",
-      href: "https://www.facebook.com/RecarReparacaoAutomotiva/",
-    },
-    {
-      name: "Recar Martelinho de Ouro",
-      href: "https://www.facebook.com/Recarmartelinhodeouro",
-    },
-  ],
-  /** Nenhum perfil de Instagram foi encontrado no site antigo. */
-  instagram: null as null,
-  /** Site público conhecido hoje. Atualize quando o domínio novo estiver no ar. */
-  knownWebsite: "https://oficinarecar.wixsite.com/recar",
+  instagram: {
+    handle: "@recar_reparacao_automotiva",
+    href: "https://www.instagram.com/recar_reparacao_automotiva/",
+  },
   weekdayHours: [
     { opens: "09:00", closes: "12:00" },
     { opens: "13:00", closes: "18:00" },
   ],
   saturdayNote: "Mediante agendamento",
 } as const;
+
+/**
+ * Domínio final do site. Defina `NEXT_PUBLIC_SITE_URL` (ex.: https://www.recar.com.br)
+ * no ambiente de deploy: sem ele, a canonical, o sitemap e os dados estruturados
+ * ficam de fora em vez de apontarem para um endereço inventado.
+ */
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "";
+
+/** Imagem usada em compartilhamentos e nos dados estruturados. */
+export const socialPreviewImage = "/images/recar-fachada-sao-braz.webp";
 
 export const nav = [
   { href: "#servicos", label: "Serviços" },
@@ -90,9 +90,11 @@ export function localBusinessJsonLd() {
     "@context": "https://schema.org",
     "@type": "AutoRepair",
     name: site.name,
-    url: site.knownWebsite,
-    image:
-      "https://static.wixstatic.com/media/95f1fb_4288021b5b2445fe82ae4c1a3e30ab7d~mv2.jpg",
+    // Sem domínio definido, `url` e `image` ficam de fora: apontar para o site
+    // antigo do Wix faria o Google indexar o endereço errado.
+    ...(siteUrl
+      ? { url: siteUrl, image: `${siteUrl}${socialPreviewImage}` }
+      : {}),
     telephone: [site.phoneSchema, site.landlineSchema],
     foundingDate: String(site.sinceYear),
     address: {
@@ -114,7 +116,7 @@ export function localBusinessJsonLd() {
       opens: slot.opens,
       closes: slot.closes,
     })),
-    sameAs: site.facebook.map((profile) => profile.href),
+    sameAs: [site.instagram.href],
     hasMap: mapsDirectionsUrl(),
   };
 }

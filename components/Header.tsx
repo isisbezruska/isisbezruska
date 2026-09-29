@@ -49,14 +49,15 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <WhatsAppButton className="hidden sm:inline-flex" variant="primary">
-            Solicitar orçamento
-          </WhatsAppButton>
-          <WhatsAppButton
-            variant="icon"
-            className="sm:hidden"
-            ariaLabel="Solicitar orçamento pelo WhatsApp"
-          />
+          <span className="hidden sm:block">
+            <WhatsAppButton variant="primary">Solicitar orçamento</WhatsAppButton>
+          </span>
+          <span className="sm:hidden">
+            <WhatsAppButton
+              variant="icon"
+              ariaLabel="Solicitar orçamento pelo WhatsApp"
+            />
+          </span>
           <button
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center text-paper lg:hidden"

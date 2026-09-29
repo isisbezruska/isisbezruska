@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { BeforeAfter } from "@/components/BeforeAfter";
 import { FinalCTA } from "@/components/FinalCTA";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { Footer } from "@/components/Footer";
@@ -19,6 +20,7 @@ export default function HomePage() {
         <Hero />
         <TrustBar />
         <Services />
+        <BeforeAfter />
         <Gallery />
         <HowItWorks />
         <About />

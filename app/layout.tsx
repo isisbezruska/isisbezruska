@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Outfit } from "next/font/google";
 import { AnalyticsBootstrap } from "@/components/AnalyticsBootstrap";
-import { localBusinessJsonLd, site } from "@/lib/site";
+import { localBusinessJsonLd, site, siteUrl, socialPreviewImage } from "@/lib/site";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -22,17 +22,36 @@ const title = "Funilaria e Pintura em Curitiba | RECAR Reparação Automotiva";
 const description =
   "Funilaria, pintura automotiva e reparos de lataria em Curitiba. Fale com a RECAR e solicite seu orçamento pelo WhatsApp.";
 
+const previewImage = {
+  url: socialPreviewImage,
+  width: 1920,
+  height: 961,
+  alt: "Fachada da RECAR Reparação Automotiva, no bairro São Braz, em Curitiba",
+};
+
 export const metadata: Metadata = {
   title,
   description,
   applicationName: site.name,
   robots: { index: true, follow: true },
+  // Sem `NEXT_PUBLIC_SITE_URL` não há como montar URLs absolutas, então canonical
+  // e imagens de compartilhamento só entram quando o domínio estiver definido.
+  ...(siteUrl
+    ? { metadataBase: new URL(siteUrl), alternates: { canonical: "/" } }
+    : {}),
   openGraph: {
     title,
     description,
     locale: "pt_BR",
     type: "website",
     siteName: site.name,
+    ...(siteUrl ? { url: "/", images: [previewImage] } : {}),
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    ...(siteUrl ? { images: [previewImage] } : {}),
   },
 };
 
@@ -47,9 +66,9 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${outfit.variable} ${fraunces.variable}`}>
       <body className="font-sans antialiased">
         {/*
-          Marcelo: cole os IDs reais de GTM, GA4 e Google Ads em lib/analytics.ts
-          (analyticsIds). Não use IDs fictícios. Quando gtmId estiver preenchido,
-          injete o snippet do Tag Manager neste layout — este é o único lugar.
+          Os IDs de GTM, GA4 e Google Ads ficam em lib/analytics.ts (analyticsIds).
+          Quando gtmId estiver preenchido, o snippet do Tag Manager entra aqui —
+          este é o único lugar do projeto que carrega scripts de medição.
         */}
         <a
           href="#conteudo"

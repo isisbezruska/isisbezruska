@@ -23,6 +23,11 @@ const variants: Record<Variant, string> = {
 
 type WhatsAppButtonProps = {
   children?: React.ReactNode;
+  /**
+   * Não use `hidden` nem outra classe de `display` aqui: cada variante já traz a
+   * sua e, com a mesma especificidade, quem vence é a ordem da folha de estilo,
+   * não a ordem do atributo. Para esconder o botão, envolva-o num elemento.
+   */
   className?: string;
   variant?: Variant;
   ariaLabel?: string;

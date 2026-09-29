@@ -16,7 +16,7 @@ export function Footer() {
         <div>
           <Image
             src="/images/recar-logo.png"
-            alt="RECAR Reparações Automotivas"
+            alt={site.name}
             width={430}
             height={219}
             className="h-14 w-auto"
@@ -66,20 +66,16 @@ export function Footer() {
                 </a>
               </li>
             ))}
-            {site.facebook.map((profile) => (
-              <li key={profile.href}>
-                <a
-                  href={profile.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-paper/80 hover:text-paper"
-                >
-                  {profile.name === site.facebook[0].name
-                    ? "Facebook"
-                    : "Facebook — Martelinho de Ouro"}
-                </a>
-              </li>
-            ))}
+            <li>
+              <a
+                href={site.instagram.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-paper/80 hover:text-paper"
+              >
+                Instagram
+              </a>
+            </li>
           </ul>
         </div>
       </div>

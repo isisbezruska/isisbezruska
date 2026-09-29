@@ -3,41 +3,49 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { heroImage } from "@/lib/content";
 import { site } from "@/lib/site";
 
+/**
+ * A foto fica num painel próprio em vez de preencher a tela inteira: as fotos da
+ * RECAR são de celular (a maior tem 1920px) e, esticadas no fundo, perdiam
+ * definição no desktop e cortavam mal no celular.
+ */
 export function Hero() {
   return (
-    <section id="topo" className="relative min-h-[100svh] bg-ink text-paper">
-      <Image
-        src={heroImage.src}
-        alt={heroImage.alt}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[center_40%]"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/88 via-ink/62 to-ink/25" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-ink/30" />
+    <section id="topo" className="bg-ink text-paper">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pt-28 pb-16 sm:px-6 sm:pt-32 sm:pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-16 lg:pt-36 lg:pb-28">
+        <div>
+          <p className="text-xs font-medium tracking-[0.18em] text-gold uppercase">
+            {site.sinceNote}
+          </p>
+          <h1 className="mt-5 max-w-[13ch] font-display text-[2.7rem] leading-[1.03] font-medium text-balance sm:text-6xl lg:text-7xl">
+            Funilaria e Pintura em Curitiba
+          </h1>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-paper/80 sm:text-lg">
+            Reparos de lataria e pintura automotiva com cuidado em cada detalhe.
+          </p>
+          <p className="mt-3 text-sm text-paper/60">Orçamento sem compromisso</p>
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-5 pb-16 pt-28 sm:px-6 sm:pb-20">
-        <p className="text-xs font-medium tracking-[0.18em] text-gold uppercase">
-          {site.sinceNote}
-        </p>
-        <h1 className="mt-4 max-w-[14ch] font-display text-[2.6rem] leading-[1.02] font-medium text-balance sm:text-6xl lg:text-7xl">
-          Funilaria e Pintura em Curitiba
-        </h1>
-        <p className="mt-5 max-w-md text-base leading-relaxed text-paper/85 sm:text-lg">
-          Reparos de lataria e pintura automotiva com cuidado em cada detalhe.
-        </p>
-        <p className="mt-3 text-sm text-paper/70">Orçamento sem compromisso</p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <WhatsAppButton className="w-full sm:w-auto">
-            Solicitar orçamento pelo WhatsApp
-          </WhatsAppButton>
-          <a
-            href="#trabalhos"
-            className="inline-flex min-h-12 items-center justify-center px-2 text-sm font-medium text-paper underline decoration-gold decoration-2 underline-offset-4"
-          >
-            Ver nossos trabalhos
-          </a>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+            <WhatsAppButton className="w-full sm:w-auto">
+              Solicitar orçamento pelo WhatsApp
+            </WhatsAppButton>
+            <a
+              href="#trabalhos"
+              className="inline-flex min-h-12 items-center justify-center text-sm font-medium text-paper underline decoration-gold decoration-2 underline-offset-4 transition hover:text-gold"
+            >
+              Ver nossos trabalhos
+            </a>
+          </div>
+        </div>
+
+        <div className="relative aspect-[16/10] overflow-hidden bg-panel sm:aspect-[3/2] lg:aspect-square">
+          <Image
+            src={heroImage.src}
+            alt={heroImage.alt}
+            fill
+            priority
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            className="object-cover"
+          />
         </div>
       </div>
     </section>

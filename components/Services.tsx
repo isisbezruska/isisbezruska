@@ -44,7 +44,7 @@ export function Services() {
           {rest.map((service, index) => (
             <article key={service.title} className="border border-ink/10 bg-white/50 p-6">
               <p className="text-xs tracking-[0.16em] text-muted">
-                {String(index + 3).padStart(2, "0")}
+                {String(featured.length + index + 1).padStart(2, "0")}
               </p>
               <h3 className="mt-4 font-display text-2xl leading-tight font-medium">
                 {service.title}
