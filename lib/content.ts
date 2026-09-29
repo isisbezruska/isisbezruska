@@ -79,7 +79,7 @@ export const services = [
 export const workPhotos: WorkPhoto[] = [
   {
     src: "/images/funilaria-01.webp",
-    alt: "Porta dianteira branca com um amassado largo, em reparo de funilaria na RECAR",
+    alt: "Kombi branca e amarela com dano na lateral, em reparo de funilaria na RECAR",
     width: 1600,
     height: 1600,
   },
