@@ -98,13 +98,21 @@ export function Gallery() {
                 Fechar
               </button>
             </div>
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              width={photo.width}
-              height={photo.height}
-              className="h-auto max-h-[70svh] w-full object-contain"
-            />
+            <div
+              className="mx-auto"
+              style={{
+                width: `min(100%, calc(70svh * ${photo.width} / ${photo.height}))`,
+                aspectRatio: `${photo.width} / ${photo.height}`,
+              }}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                className="h-full w-full object-contain"
+              />
+            </div>
             <div className="mt-3 flex justify-between">
               <button type="button" className="min-h-11 px-3 text-sm" onClick={showPrevious}>
                 Anterior

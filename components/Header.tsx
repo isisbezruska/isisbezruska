@@ -32,7 +32,7 @@ export function Header() {
             width={430}
             height={219}
             priority
-            className="h-11 w-auto sm:h-12"
+            className="h-12 w-auto sm:h-14"
           />
         </a>
 
