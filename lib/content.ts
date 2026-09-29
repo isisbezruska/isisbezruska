@@ -22,16 +22,19 @@ export type Photo = {
 /**
  * Enquadramento fechado na lataria: mostra o acabamento da pintura sem depender
  * de um modelo de carro específico e não quebra em nenhuma proporção de tela.
- * A 960x720 cobre o painel do hero sem precisar de ampliação.
  */
-export const heroImage: Photo = {
+export const aboutImage: Photo = {
   src: "/images/pintura-preta-polida.webp",
   alt: "Lateral de um carro preto com a pintura polida refletindo o entorno, ao lado da roda esportiva",
   width: 960,
   height: 720,
 };
 
-/** Fachada da oficina na R. José Rubens de Lima, 400, com a placa da RECAR. */
+/**
+ * Fachada da oficina na R. José Rubens de Lima, 400, com a placa da RECAR. Usada
+ * no hero em tela cheia: com 1920px de largura, fica um pouco macia em telas de
+ * alta densidade, o que o véu escuro por cima disfarça.
+ */
 export const shopImage: Photo = {
   src: "/images/recar-fachada-sao-braz.webp",
   alt: "Fachada da RECAR no bairro São Braz, em Curitiba, com a placa da oficina e um Fusca preto estacionado na frente",
@@ -127,7 +130,7 @@ export const beforeAfter: Array<Photo & { caption: string }> = [
 export const deliveredPhotos: Photo[] = [
   {
     src: "/images/entrega-toyota-corolla-branco.webp",
-    alt: "Toyota Corolla branco pronto para a entrega, em frente ao painel amarelo com a marca da RECAR",
+    alt: "Toyota Corolla branco pronto para a entrega",
     width: 640,
     height: 640,
   },
@@ -145,19 +148,19 @@ export const deliveredPhotos: Photo[] = [
   },
   {
     src: "/images/entrega-renault-fluence-branco.webp",
-    alt: "Renault Fluence branco pronto para a entrega, em frente ao painel amarelo da RECAR",
+    alt: "Renault Fluence branco pronto para a entrega",
     width: 640,
     height: 640,
   },
   {
     src: "/images/entrega-mitsubishi-lancer-branco.webp",
-    alt: "Mitsubishi Lancer branco pronto após o serviço, em frente ao painel amarelo da RECAR",
+    alt: "Mitsubishi Lancer branco pronto após o serviço",
     width: 613,
     height: 640,
   },
   {
     src: "/images/entrega-bmw-preto.webp",
-    alt: "BMW preto com a pintura espelhada, pronto para a entrega em frente ao painel amarelo da RECAR",
+    alt: "BMW preto com a pintura espelhada, pronto para a entrega",
     width: 640,
     height: 640,
   },
@@ -169,7 +172,7 @@ export const deliveredPhotos: Photo[] = [
   },
   {
     src: "/images/entrega-cupe-vermelho.webp",
-    alt: "Cupê esportivo vermelho com a pintura refeita, parado em frente ao painel amarelo da RECAR",
+    alt: "Cupê esportivo vermelho com a pintura refeita",
     width: 640,
     height: 640,
   },
@@ -181,7 +184,7 @@ export const deliveredPhotos: Photo[] = [
   },
   {
     src: "/images/entrega-perua-preta.webp",
-    alt: "Perua preta com rack de teto, pronta para a entrega em frente ao painel amarelo da RECAR",
+    alt: "Perua preta com rack de teto, pronta para a entrega",
     width: 640,
     height: 640,
   },
@@ -262,10 +265,3 @@ export const steps = [
 
 /** Tudo o que entra na galeria, dos carros mais recentes aos restaurados. */
 export const galleryPhotos: Photo[] = [...deliveredPhotos, ...workPhotos];
-
-/** Amostra da seção de Instagram — precisa vir do próprio perfil. */
-export const socialPhotos = [
-  deliveredPhotos[0],
-  deliveredPhotos[2],
-  deliveredPhotos[8],
-] as const;

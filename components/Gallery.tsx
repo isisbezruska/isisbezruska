@@ -1,14 +1,20 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { galleryPhotos, type Photo } from "@/lib/content";
 
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function Gallery() {
   const [active, setActive] = useState<number | null>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const titleId = useId();
+  const trackRef = useRef<HTMLUListElement>(null);
   const photo: Photo | null = active === null ? null : galleryPhotos[active];
 
   useEffect(() => {
@@ -20,6 +26,34 @@ export function Gallery() {
     }
     if (!dialog.open) dialog.showModal();
   }, [active]);
+
+  const updateEdges = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    setAtStart(track.scrollLeft <= 4);
+    setAtEnd(track.scrollLeft + track.clientWidth >= track.scrollWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    updateEdges();
+    track.addEventListener("scroll", updateEdges, { passive: true });
+    window.addEventListener("resize", updateEdges);
+    return () => {
+      track.removeEventListener("scroll", updateEdges);
+      window.removeEventListener("resize", updateEdges);
+    };
+  }, [updateEdges]);
+
+  function scrollByPage(direction: 1 | -1) {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({
+      left: direction * track.clientWidth * 0.9,
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+    });
+  }
 
   function showPrevious() {
     setActive((current) => {
@@ -35,38 +69,94 @@ export function Gallery() {
     });
   }
 
+  const arrowClass =
+    "inline-flex size-12 items-center justify-center border border-paper/25 text-paper transition hover:border-gold hover:text-gold disabled:pointer-events-none disabled:opacity-30";
+
   return (
     <section id="galeria" className="scroll-mt-20 bg-ink pb-20 text-paper sm:pb-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <h2 className="max-w-xl font-display text-3xl leading-tight font-medium text-balance sm:text-4xl">
-          Outros trabalhos realizados
-        </h2>
-        <p className="mt-4 max-w-lg text-sm leading-relaxed text-paper/70 sm:text-base">
-          Carros prontos para a entrega e trabalhos de funilaria, pintura, polimento
-          e restauração, fotografados na própria oficina.
-        </p>
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <h2 className="max-w-xl font-display text-3xl leading-tight font-medium text-balance sm:text-4xl">
+              Outros trabalhos realizados
+            </h2>
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-paper/70 sm:text-base">
+              Carros prontos para a entrega e trabalhos de funilaria, pintura,
+              polimento e restauração, fotografados na própria oficina.
+            </p>
+          </div>
+          <div className="hidden gap-2 sm:flex">
+            <button
+              type="button"
+              className={arrowClass}
+              onClick={() => scrollByPage(-1)}
+              disabled={atStart}
+              aria-label="Fotos anteriores"
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+            <button
+              type="button"
+              className={arrowClass}
+              onClick={() => scrollByPage(1)}
+              disabled={atEnd}
+              aria-label="Próximas fotos"
+            >
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
 
-        <ul className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3">
+        <ul
+          ref={trackRef}
+          className="-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 [&::-webkit-scrollbar]:hidden"
+        >
           {galleryPhotos.map((item, index) => (
-            <li key={item.src} className="mb-4 break-inside-avoid">
+            <li
+              key={item.src}
+              className="w-[78%] shrink-0 snap-start sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)]"
+            >
               <button
                 type="button"
-                className="block w-full overflow-hidden bg-panel text-left"
+                className="group relative block aspect-[4/5] w-full overflow-hidden bg-panel"
                 onClick={() => setActive(index)}
-                aria-label={`Ampliar foto: ${item.alt}`}
+                aria-label={`Ampliar foto ${index + 1} de ${galleryPhotos.length}`}
               >
                 <Image
                   src={item.src}
                   alt=""
-                  width={item.width}
-                  height={item.height}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="h-auto w-full transition duration-500 hover:opacity-90"
+                  fill
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 78vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 />
               </button>
             </li>
           ))}
         </ul>
+
+        <div className="mt-5 flex items-center justify-between gap-4 sm:hidden">
+          <p className="text-xs text-paper/55">Deslize para ver mais fotos</p>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              className={arrowClass}
+              onClick={() => scrollByPage(-1)}
+              disabled={atStart}
+              aria-label="Fotos anteriores"
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+            <button
+              type="button"
+              className={arrowClass}
+              onClick={() => scrollByPage(1)}
+              disabled={atEnd}
+              aria-label="Próximas fotos"
+            >
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
 
         <div className="mt-12 border-t border-paper/10 pt-8">
           <p className="font-display text-3xl font-medium sm:text-4xl">
@@ -78,16 +168,13 @@ export function Gallery() {
 
       <dialog
         ref={dialogRef}
-        aria-labelledby={titleId}
-        className="w-[min(100%-1.5rem,960px)] border-0 bg-ink p-3 text-paper backdrop:bg-ink/80"
+        aria-label={active === null ? "Foto ampliada" : `Foto ${active + 1} de ${galleryPhotos.length}`}
+        className="fixed inset-0 m-auto h-fit max-h-[calc(100svh-2rem)] w-[min(100%-1.5rem,960px)] overflow-auto border-0 bg-ink p-3 text-paper backdrop:bg-ink/80"
         onClose={() => setActive(null)}
       >
         {photo ? (
           <div>
-            <div className="flex items-center justify-between gap-3 px-1 pb-3">
-              <p id={titleId} className="text-sm leading-snug text-paper/80">
-                {photo.alt}
-              </p>
+            <div className="flex justify-end px-1 pb-3">
               <button
                 type="button"
                 className="min-h-11 shrink-0 px-3 text-sm"
@@ -105,7 +192,7 @@ export function Gallery() {
             >
               <Image
                 src={photo.src}
-                alt={photo.alt}
+                alt=""
                 width={photo.width}
                 height={photo.height}
                 className="h-full w-full object-contain"

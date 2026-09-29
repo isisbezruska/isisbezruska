@@ -9,7 +9,6 @@ import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Location } from "@/components/Location";
 import { Services } from "@/components/Services";
-import { Social } from "@/components/Social";
 import { TrustBar } from "@/components/TrustBar";
 
 export default function HomePage() {
@@ -25,7 +24,6 @@ export default function HomePage() {
         <HowItWorks />
         <About />
         <Location />
-        <Social />
         <FinalCTA />
       </main>
       <Footer />

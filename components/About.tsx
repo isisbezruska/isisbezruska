@@ -1,20 +1,18 @@
 import Image from "next/image";
-import { shopImage } from "@/lib/content";
+import { aboutImage } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export function About() {
   return (
     <section id="sobre" className="scroll-mt-20 bg-paper pb-20 text-ink sm:pb-28">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-2 lg:gap-16">
-        {/* A placa e a entrada da oficina ficam à esquerda da foto; um recorte
-            centralizado deixaria só a árvore em quadro. */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-ink sm:aspect-[16/9] lg:aspect-[4/3]">
+        <div className="relative aspect-[4/3] overflow-hidden bg-ink">
           <Image
-            src={shopImage.src}
-            alt={shopImage.alt}
+            src={aboutImage.src}
+            alt={aboutImage.alt}
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover object-[30%_45%]"
+            className="object-cover"
           />
         </div>
         <div>

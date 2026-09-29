@@ -1,28 +1,42 @@
 import Image from "next/image";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { heroImage } from "@/lib/content";
+import { shopImage } from "@/lib/content";
 import { site } from "@/lib/site";
 
-/**
- * A foto fica num painel próprio em vez de preencher a tela inteira: as fotos da
- * RECAR são de celular (a maior tem 1920px) e, esticadas no fundo, perdiam
- * definição no desktop e cortavam mal no celular.
- */
 export function Hero() {
   return (
-    <section id="topo" className="bg-ink text-paper">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pt-28 pb-16 sm:px-6 sm:pt-32 sm:pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-16 lg:pt-36 lg:pb-28">
-        <div>
+    <section
+      id="topo"
+      className="relative isolate flex min-h-[92svh] items-end overflow-hidden bg-ink text-paper sm:min-h-[88svh] lg:items-center"
+    >
+      {/* A placa da RECAR e o Fusca ficam no terço esquerdo da foto: no celular o
+          recorte se prende a eles, e no desktop o texto vai para a direita para
+          não cobri-los. */}
+      <Image
+        src={shopImage.src}
+        alt={shopImage.alt}
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover object-[4%_50%] lg:object-center"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/75 to-ink/35 lg:bg-gradient-to-l lg:from-ink/95 lg:via-ink/70 lg:to-ink/15"
+      />
+
+      <div className="mx-auto w-full max-w-6xl px-5 pt-32 pb-14 sm:px-6 sm:pb-20 lg:flex lg:justify-end lg:py-36">
+        <div className="lg:w-[34rem]">
           <p className="text-xs font-medium tracking-[0.18em] text-gold uppercase">
             {site.sinceNote}
           </p>
           <h1 className="mt-5 max-w-[13ch] font-display text-[2.7rem] leading-[1.03] font-medium text-balance sm:text-6xl lg:text-7xl">
             Funilaria e Pintura em Curitiba
           </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-paper/80 sm:text-lg">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-paper/85 sm:text-lg">
             Reparos de lataria e pintura automotiva com cuidado em cada detalhe.
           </p>
-          <p className="mt-3 text-sm text-paper/60">Orçamento sem compromisso</p>
+          <p className="mt-3 text-sm text-paper/70">Orçamento sem compromisso</p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
             <WhatsAppButton className="w-full sm:w-auto">
@@ -35,17 +49,6 @@ export function Hero() {
               Ver nossos trabalhos
             </a>
           </div>
-        </div>
-
-        <div className="relative aspect-[16/10] overflow-hidden bg-panel sm:aspect-[3/2] lg:aspect-square">
-          <Image
-            src={heroImage.src}
-            alt={heroImage.alt}
-            fill
-            priority
-            sizes="(min-width: 1024px) 40vw, 100vw"
-            className="object-cover"
-          />
         </div>
       </div>
     </section>
