@@ -1,67 +1,27 @@
+# RECAR Reparação Automotiva
 
-### Olá Pessoal 👋
-#### 🔭 Atualmente trabalho como desenvolvedora Full Stack Pleno
-#### 🌱 Sou formada em Engenharia da Computação - UP e MBA em Engenharia de Softwre na UTFPR
-#### ⚡  Linguagens de programação: 
-#### Front-end: Java Script, React, HTML5, CSS3
-#### Back-end: C, C++, C#, Node JS
-#### Mobile: Flutter e React Native 
+Landing page da oficina RECAR, em Curitiba. O objetivo é receber quem chega pelo Google Ads, mostrar os serviços e os trabalhos reais e levar o orçamento para o WhatsApp.
 
-<div>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"  width="50" height="50"/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"  width="50" height="50" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg"  width="50" height="50" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"   width="50" height="50"/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"  width="50" height="50"  />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg"  width="50" height="50"  />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"  width="50" height="50" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg"  width="50" height="50" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain-wordmark.svg" width="50" height="50" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"  width="50" height="50"/>
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" width="50" height="50" />
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="50" height="50"/>
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" width="50" height="50" />
+## Como rodar
 
+```bash
+npm install
+npm run dev
+```
 
+Abra [http://localhost:3000](http://localhost:3000).
 
+Produção:
 
+```bash
+npm run typecheck
+npm run lint
+npm run build
+npm start
+```
 
-</div>
+## Onde alterar dados comerciais
 
-<br></br>
+Telefone, endereço, WhatsApp, redes e ano de fundação ficam em `lib/site.ts`.
 
-<div>
-<a href="https://github.com/isisbezruska">
-<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=isisbezruska&layout=compact&langs_count=7&theme=dracula"/>
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=isisbezruska&show_icons=true&theme=dracula&include_all_commits=true&count_private=true"/>
-</div>
-
-
-
- 
- ## Contatos:
- <div>
-<a href="https://instagram.com/isisbezruska" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
-<a href="https://br.linkedin.com/in/isisbezruska/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>   
-</div>
-          
-          
-          
-          
-          
-          
-          
-<!--
-**isisbezruska/isisbezruska** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+IDs de GTM, GA4 e Google Ads ficam em `lib/analytics.ts` e são injetados depois em `app/layout.tsx`. Não há IDs fictícios no projeto.

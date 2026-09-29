@@ -1,0 +1,33 @@
+import { About } from "@/components/About";
+import { FinalCTA } from "@/components/FinalCTA";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { Footer } from "@/components/Footer";
+import { Gallery } from "@/components/Gallery";
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { HowItWorks } from "@/components/HowItWorks";
+import { Location } from "@/components/Location";
+import { Services } from "@/components/Services";
+import { Social } from "@/components/Social";
+import { TrustBar } from "@/components/TrustBar";
+
+export default function HomePage() {
+  return (
+    <>
+      <Header />
+      <main id="conteudo">
+        <Hero />
+        <TrustBar />
+        <Services />
+        <Gallery />
+        <HowItWorks />
+        <About />
+        <Location />
+        <Social />
+        <FinalCTA />
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
+    </>
+  );
+}
